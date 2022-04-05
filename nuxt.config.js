@@ -63,8 +63,6 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    ["vue-scrollto/nuxt", { duration: 300 }],
-    "nuxt-fontawesome",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

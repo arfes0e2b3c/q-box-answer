@@ -12,10 +12,10 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_e5589318 from 'nuxt_plugin_plugin_e5589318' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_templatesplugin4c3ec479_37b57386 from 'nuxt_plugin_templatesplugin4c3ec479_37b57386' // Source: ./templates.plugin.4c3ec479.js (mode: 'all')
-import nuxt_plugin_vuescrollto_1b0d673f from 'nuxt_plugin_vuescrollto_1b0d673f' // Source: ./vue-scrollto.js (mode: 'client')
-import nuxt_plugin_axios_61c620ec from 'nuxt_plugin_axios_61c620ec' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_5473ab1e from 'nuxt_plugin_plugin_5473ab1e' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_templatesplugin3170ba5c_608ffa5a from 'nuxt_plugin_templatesplugin3170ba5c_608ffa5a' // Source: ./templates.plugin.3170ba5c.js (mode: 'all')
+import nuxt_plugin_vuescrollto_6990adbc from 'nuxt_plugin_vuescrollto_6990adbc' // Source: ./vue-scrollto.js (mode: 'client')
+import nuxt_plugin_axios_d2f091f2 from 'nuxt_plugin_axios_d2f091f2' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_common_47fd80b8 from 'nuxt_plugin_common_47fd80b8' // Source: ../plugins/common.js (mode: 'all')
 import nuxt_plugin_vuescrollto_4c33e698 from 'nuxt_plugin_vuescrollto_4c33e698' // Source: ../plugins/vue-scrollto.js (mode: 'all')
 
@@ -57,7 +57,7 @@ Object.defineProperty(Vue.prototype, '$nuxt', {
 
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext, config)
@@ -181,20 +181,20 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_e5589318 === 'function') {
-    await nuxt_plugin_plugin_e5589318(app.context, inject)
+  if (typeof nuxt_plugin_plugin_5473ab1e === 'function') {
+    await nuxt_plugin_plugin_5473ab1e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_templatesplugin4c3ec479_37b57386 === 'function') {
-    await nuxt_plugin_templatesplugin4c3ec479_37b57386(app.context, inject)
+  if (typeof nuxt_plugin_templatesplugin3170ba5c_608ffa5a === 'function') {
+    await nuxt_plugin_templatesplugin3170ba5c_608ffa5a(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_vuescrollto_1b0d673f === 'function') {
-    await nuxt_plugin_vuescrollto_1b0d673f(app.context, inject)
+  if (process.client && typeof nuxt_plugin_vuescrollto_6990adbc === 'function') {
+    await nuxt_plugin_vuescrollto_6990adbc(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_61c620ec === 'function') {
-    await nuxt_plugin_axios_61c620ec(app.context, inject)
+  if (typeof nuxt_plugin_axios_d2f091f2 === 'function') {
+    await nuxt_plugin_axios_d2f091f2(app.context, inject)
   }
 
   if (typeof nuxt_plugin_common_47fd80b8 === 'function') {

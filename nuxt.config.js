@@ -2,7 +2,7 @@ require("dotenv").config();
 import axios from "axios";
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+  ssr: true,
   loading: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -63,7 +63,6 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    "@nuxtjs/proxy",
     ["vue-scrollto/nuxt", { duration: 300 }],
     "nuxt-fontawesome",
   ],

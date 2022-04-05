@@ -8,6 +8,4 @@ You can directly use them in pages and other components without the need to impo
 
 - `<AnswerWaitPost>` | `<answer-wait-post>` (components/AnswerWaitPost.vue)
 - `<AnswerWaitReply>` | `<answer-wait-reply>` (components/AnswerWaitReply.vue)
-- `<FilteredPost>` | `<filtered-post>` (components/FilteredPost.vue)
-- `<NewPost>` | `<new-post>` (components/NewPost.vue)
 - `<SharedSendSentence>` | `<shared-send-sentence>` (components/shared/SendSentence.vue)

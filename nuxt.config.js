@@ -6,7 +6,7 @@ export default {
   loading: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Q-BOX",
+    title: "お手サーの質問箱(管理者版)",
     htmlAttrs: {
       lang: "ja",
     },
@@ -17,30 +17,30 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "お手伝いサークルの質問箱です",
+        content: "お手伝いサークルの質問箱(管理者版)です",
       },
       { hid: "og:site_name", property: "og:site_name", content: "質問箱" },
       { hid: "og:type", property: "og:type", content: "website" },
       {
         hid: "og:url",
         property: "og:url",
-        content: "https://immense-sea-94037.herokuapp.com",
+        content: "https://q-box-answer.herokuapp.com/",
       },
       {
         hid: "og:title",
         property: "og:title",
-        content: "質問や過去の回答はこちらから！",
+        content: "お手サーの管理者用ページです",
       },
       {
         hid: "og:description",
         property: "og:description",
-        content: "お手伝いサークルの質問箱です",
+        content: "お手サーの管理者用ページです",
       },
       {
         hid: "og:image",
         property: "og:image",
         content:
-          "https%3A%2F%2Fassets.imgix.net%2F~text%3Fw%3D1000%26txt-color%3D333%26txt-align%3Dcenter%26txt-size%3D36%26txtfont%3DHiragino%20Sans%20W6%26txt64%3Dhttps://images.microcms-assets.io/assets/ca0c41f03efd472a910782fea07dff31/24499c585ea7442b80644aa3f8237092/frame.png?w=1200&h=630&blend-mode=normal&blend-align=middle,center&blend=お手伝いサークルの質問箱です",
+          "https://images.microcms-assets.io/assets/ca0c41f03efd472a910782fea07dff31/24499c585ea7442b80644aa3f8237092/frame.png?w=1200&h=630&blend-mode=normal&blend-align=middle,center&blend=https%3A%2F%2Fassets.imgix.net%2F~text%3Fw%3D1000%26txt-color%3D333%26txt-align%3Dcenter%26txt-size%3D36%26txtfont%3DHiragino%20Sans%20W6%26txt%3Dお手伝いサークルの質問箱です",
       },
       { name: "twitter:card", content: "summary_large_image" },
     ],

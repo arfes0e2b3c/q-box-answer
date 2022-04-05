@@ -20,7 +20,6 @@
     </div>
   </transition>
 </template>
->
 <script>
 import OAuth from "oauth-1.0a";
 import crypto from "crypto";

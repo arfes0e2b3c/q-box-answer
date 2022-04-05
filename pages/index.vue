@@ -9,7 +9,7 @@
           duration: 500,
         }"
       >
-        お手サーの質問箱(管理者版)
+        質問箱(管理者版)
       </h1>
       <button @click="changePage">画面切り替え</button>
     </header>

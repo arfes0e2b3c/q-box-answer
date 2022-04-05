@@ -186,7 +186,6 @@ export default {
       } else {
         console.log("not fit!");
       }
-      console.log(config);
       await this.$axios
         .$post("/api/2/tweets", data, {
           headers: {
@@ -194,7 +193,6 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
           if (slicedAnswer.length > 1) {
             this.postTweet(slicedAnswer.slice(1), response.data.id, "reply");
           }

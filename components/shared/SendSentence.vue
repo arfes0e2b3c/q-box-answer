@@ -67,55 +67,8 @@ export default {
       this.getShow = !this.getShow;
     },
     async sendSentence() {
-      if (this.sentence && this.getMode === "question") {
-        await this.$axios
-          .$post(
-            "https://q-box.microcms.io/api/v1/q_box_posts",
-            {
-              question: this.sentence,
-              held: false,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                "X-MICROCMS-API-KEY": this.MICROCMS_KEY,
-              },
-            }
-          )
-          .catch((error) => {
-            alert("通信に失敗しました。：" + error);
-            console.log(error);
-          })
-          .then(() => {
-            this.sentence = "";
-            alert("送信しました。");
-          });
-      } else if (this.sentence && this.getMode === "answer") {
+      if (this.sentence && this.getMode === "answer") {
         this.postTweet(this.sentence, this.getContentId, "tweet", "answer");
-      } else if (this.sentence && this.getMode === "reply") {
-        await this.$axios
-          .$post(
-            "https://q-box.microcms.io/api/v1/q_box_replies/",
-            {
-              replyFor: this.getContentId,
-              replySentence: this.sentence,
-              held: false,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                "X-MICROCMS-API-KEY": this.MICROCMS_KEY,
-              },
-            }
-          )
-          .catch((error) => {
-            alert("通信に失敗しました。：" + error);
-            console.log(error);
-          })
-          .then(() => {
-            this.sentence = "";
-            // location.reload()
-          });
       } else if (this.sentence && this.getMode === "replyForReply") {
         this.postTweet(
           "【フォロワーの方からの情報】\n\n" +
@@ -230,7 +183,6 @@ export default {
         .then(() => {
           this.$emit("get-posts");
           this.sentence = "";
-          // location.reload()
         });
     },
     async sendSentenceModeReplyForReply() {

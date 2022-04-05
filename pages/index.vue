@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <nuxt-link to="/" class="nuxt-link">質問一覧</nuxt-link>
+      <button @click="toQBox">質問箱を見に行く</button>
       <h1
         v-scroll-to="{
           element: '#app',
@@ -9,7 +9,7 @@
           duration: 500,
         }"
       >
-        お手サーの質問箱
+        お手サーの質問箱(管理者版)
       </h1>
       <button @click="changePage">画面切り替え</button>
     </header>
@@ -29,6 +29,10 @@ export default {
     changePage() {
       this.showPost = !this.showPost;
       this.showReply = !this.showReply;
+    },
+    toQBox() {
+      const url = "https://unique-donut-e9d728.netlify.app/";
+      window.open(url, "_blank");
     },
   },
 };

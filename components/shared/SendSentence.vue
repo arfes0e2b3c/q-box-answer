@@ -73,6 +73,7 @@ export default {
           "【フォロワーの方からの情報】\n\n" +
             this.getReplySentence +
             "\n\n" +
+            "【お手サーから】\n" +
             this.sentence,
           this.getReplyTweetId,
           "reply",
@@ -82,7 +83,6 @@ export default {
       }
     },
     async postTweet(answer, id, mode, sendSentenceMode) {
-      console.log("posttweet", answer, id);
       const TWEET_LIMIT_CHARS_INCLUDE_URL = 110;
       const TWEET_LIMIT_CHARS = 140;
       let slicedAnswer = [...answer];
@@ -167,6 +167,7 @@ export default {
           {
             answer: this.sentence,
             replyTweetId: id,
+            state: "answered",
           },
           {
             headers: {

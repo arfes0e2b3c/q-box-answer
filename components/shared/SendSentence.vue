@@ -3,7 +3,7 @@
     <div
       v-show="getShow"
       class="sentence-box"
-      :class="{ held: this.held, boxHeightInPosts: getMode === 'reply' }"
+      :class="{ boxHeightInPosts: getMode === 'reply' }"
     >
       <h3 v-show="getMode === 'question'">質問する</h3>
       <textarea
@@ -14,8 +14,12 @@
       <p v-show="getMode === 'answer' || getMode === 'replyForReply'">
         {{ this.sentence.length }}
       </p>
-      <button @click="sendSentence()" class="button">
-        {{ this.buttonWord[mode] }}
+      <button @click="sendSentence('answered')" class="button">
+        {{ this.buttonWord[getMode] }}
+      </button>
+      <button @click="sendSentence('keep')" class="button">保留</button>
+      <button @click="sendSentence('wait-information')" class="button">
+        情報募集
       </button>
     </div>
   </transition>
@@ -30,7 +34,6 @@ export default {
     replyTweetId: "",
     contentOriginId: "",
     replySentence: "",
-    held: false,
     show: "",
     MICROCMS_KEY: "",
     CONSUMER_KEY: "",
@@ -65,9 +68,15 @@ export default {
     toggle() {
       this.getShow = !this.getShow;
     },
-    async sendSentence() {
+    async sendSentence(state) {
       if (this.sentence && this.getMode === "answer") {
-        this.postTweet(this.sentence, this.getContentId, "tweet", "answer");
+        this.postTweet(
+          this.sentence,
+          this.getContentId,
+          "tweet",
+          "answer",
+          state
+        );
       } else if (this.sentence && this.getMode === "replyForReply") {
         this.postTweet(
           "【フォロワーの方からの情報】\n\n" +
@@ -82,7 +91,7 @@ export default {
         this.$emit("setReply");
       }
     },
-    async postTweet(answer, id, mode, sendSentenceMode) {
+    async postTweet(answer, id, mode, sendSentenceMode, state) {
       const TWEET_LIMIT_CHARS_INCLUDE_URL = 110;
       const TWEET_LIMIT_CHARS = 140;
       let slicedAnswer = [...answer];
@@ -149,7 +158,7 @@ export default {
             this.postTweet(slicedAnswer.slice(1), response.data.id, "reply");
           }
           if (sendSentenceMode === "answer") {
-            this.sendSentenceModeAnswer(response.data.id);
+            this.sendSentenceModeAnswer(response.data.id, state);
           } else if (sendSentenceMode === "replyForReply") {
             this.sendSentenceModeReplyForReply(response.data.id);
             this.setReplyTweetId(response.data.id);
@@ -160,14 +169,14 @@ export default {
           console.log(error);
         });
     },
-    async sendSentenceModeAnswer(id) {
+    async sendSentenceModeAnswer(id, state) {
       await this.$axios
         .$patch(
           "https://q-box.microcms.io/api/v1/q_box_posts/" + this.getContentId,
           {
             answer: this.sentence,
             replyTweetId: id,
-            state: "answered",
+            state: state,
           },
           {
             headers: {
@@ -268,12 +277,6 @@ export default {
       border: 1px solid rgba(0, 0, 200, 1);
       color: white;
     }
-  }
-}
-.held {
-  .button {
-    color: white;
-    border: 1px solid white;
   }
 }
 .boxHeightInPosts {

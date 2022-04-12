@@ -2,15 +2,13 @@
   <ul>
     <div>
       <h2>未回答の質問(古い順)</h2>
-      <button @click="held">保留のみ表示</button>
     </div>
     <p v-show="!posts[0]">質問はありません</p>
     <transition-group name="flip-list">
-      <li v-for="post in posts" :key="post.id" :class="{ held: post.held }">
+      <li v-for="post in posts" :key="post.id">
         <div class="box">
           <div>
             <button @click="deletePost(post.id)">削除</button>
-            <button @click="holdPost(post.id, post.held)">保留</button>
           </div>
           <h3>{{ post.question }}</h3>
           <button @click="showSendSentence(post.id)" class="toggle-button">
@@ -22,7 +20,6 @@
           :mode="modeAnswer"
           :content-id="post.id"
           :ref="post.id"
-          :held="post.held"
           :show="false"
           :MICROCMS_KEY="MICROCMS_KEY"
           :CONSUMER_KEY="CONSUMER_KEY"
@@ -42,7 +39,6 @@ export default {
     return {
       posts: [],
       modeAnswer: "answer",
-      heldOnly: false,
       MICROCMS_KEY: "",
       CONSUMER_KEY: "",
       CONSUMER_KEY_SECRET: "",
@@ -72,21 +68,6 @@ export default {
     },
     deletePost(id) {
       Common.deletePost(this, id, "q_box_posts", this.MICROCMS_KEY);
-    },
-    holdPost(id, held) {
-      Common.holdPost(this, id, "q_box_posts", this.MICROCMS_KEY, held);
-    },
-    held() {
-      if (!this.heldOnly) {
-        this.posts.sort((first, second) => {
-          return first.held === second.held ? 0 : first.held ? -1 : 1;
-        });
-      } else {
-        this.posts.sort((first, second) => {
-          return first.createdAt > second.createdAt ? 0 : -1;
-        });
-      }
-      this.heldOnly = !this.heldOnly;
     },
   },
   async mounted() {
@@ -157,23 +138,6 @@ ul {
           background-color: rgb(48, 48, 48);
           border-color: rgb(48, 48, 48);
         }
-      }
-    }
-  }
-  .held {
-    background-color: #333;
-    color: white;
-    .box div button {
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 1);
-    }
-    div .toggle-button {
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 1);
-      &:hover {
-        background-color: rgb(255, 255, 255);
-        border: 1px solid rgba(255, 255, 255, 1);
-        color: rgb(48, 48, 48);
       }
     }
   }

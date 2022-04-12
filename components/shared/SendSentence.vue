@@ -18,9 +18,6 @@
         {{ this.buttonWord[getMode] }}
       </button>
       <button @click="sendSentence('keep')" class="button">保留</button>
-      <button @click="sendSentence('waitInformation')" class="button">
-        情報募集
-      </button>
     </div>
   </transition>
 </template>

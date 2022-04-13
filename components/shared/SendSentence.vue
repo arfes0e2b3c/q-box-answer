@@ -130,6 +130,15 @@ export default {
 
       let data = {};
       if (mode === "tweet") {
+        if (state === "keep") {
+          data = {
+            text:
+              slicedAnswer[0] +
+              "\n\n#保留中" +
+              "\nhttps://unique-donut-e9d728.netlify.app/" +
+              id,
+          };
+        }
         data = {
           text:
             slicedAnswer[0] + "\nhttps://unique-donut-e9d728.netlify.app/" + id,

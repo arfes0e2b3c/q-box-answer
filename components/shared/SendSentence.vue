@@ -134,15 +134,18 @@ export default {
           data = {
             text:
               slicedAnswer[0] +
-              "\n\n#保留中" +
+              "\n\n#保留中の質問" +
+              "\nhttps://unique-donut-e9d728.netlify.app/" +
+              id,
+          };
+        } else {
+          data = {
+            text:
+              slicedAnswer[0] +
               "\nhttps://unique-donut-e9d728.netlify.app/" +
               id,
           };
         }
-        data = {
-          text:
-            slicedAnswer[0] + "\nhttps://unique-donut-e9d728.netlify.app/" + id,
-        };
       } else if (mode === "reply") {
         data = {
           text: slicedAnswer[0],
@@ -176,11 +179,15 @@ export default {
         });
     },
     async sendSentenceModeAnswer(id, state) {
+      const keepSentence = "";
+      if (state === "keep") {
+        keepSentence = "\n\n#保留中の質問";
+      }
       await this.$axios
         .$patch(
           "https://q-box.microcms.io/api/v1/q_box_posts/" + this.getContentId,
           {
-            answer: this.sentence,
+            answer: this.sentence + keep,
             replyTweetId: id,
             state: state,
           },

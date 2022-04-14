@@ -179,7 +179,7 @@ export default {
         });
     },
     async sendSentenceModeAnswer(id, state) {
-      const keepSentence = "";
+      let keepSentence = "";
       if (state === "keep") {
         keepSentence = "\n\n#保留中の質問";
       }

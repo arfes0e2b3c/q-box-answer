@@ -187,7 +187,7 @@ export default {
         .$patch(
           "https://q-box.microcms.io/api/v1/q_box_posts/" + this.getContentId,
           {
-            answer: this.sentence + keep,
+            answer: this.sentence + keepSentence,
             replyTweetId: id,
             state: state,
           },

@@ -14,10 +14,18 @@
       <p v-show="getMode === 'answer' || getMode === 'replyForReply'">
         {{ this.sentence.length }}
       </p>
-      <button @click="sendSentence('answered')" class="button">
-        {{ this.buttonWord[getMode] }}
-      </button>
-      <button @click="sendSentence('keep')" class="button">保留</button>
+      <div class="button-container">
+        <button @click="sendSentence('answered')" class="button">
+          {{ this.buttonWord[getMode] }}
+        </button>
+        <button
+          @click="sendSentence('keep')"
+          class="button"
+          v-show="getMode !== 'keep'"
+        >
+          保留
+        </button>
+      </div>
     </div>
   </transition>
 </template>
@@ -52,12 +60,14 @@ export default {
         answer: "この質問への回答を入力する",
         reply: "この質問への返信を入力する",
         replyForReply: "この返信への回答を入力する",
+        keep: "保留中の質問に対する回答を入力する",
       },
       buttonWord: {
         question: "質問する",
         answer: "回答する",
         reply: "返信する",
         replyForReply: "回答する",
+        keep: "回答する",
       },
     };
   },
@@ -130,22 +140,10 @@ export default {
 
       let data = {};
       if (mode === "tweet") {
-        if (state === "keep") {
-          data = {
-            text:
-              slicedAnswer[0] +
-              "\n\n#保留中の質問" +
-              "\nhttps://unique-donut-e9d728.netlify.app/" +
-              id,
-          };
-        } else {
-          data = {
-            text:
-              slicedAnswer[0] +
-              "\nhttps://unique-donut-e9d728.netlify.app/" +
-              id,
-          };
-        }
+        data = {
+          text:
+            slicedAnswer[0] + "\nhttps://unique-donut-e9d728.netlify.app/" + id,
+        };
       } else if (mode === "reply") {
         data = {
           text: slicedAnswer[0],
@@ -179,15 +177,11 @@ export default {
         });
     },
     async sendSentenceModeAnswer(id, state) {
-      let keepSentence = "";
-      if (state === "keep") {
-        keepSentence = "\n\n#保留中の質問";
-      }
       await this.$axios
         .$patch(
           "https://q-box.microcms.io/api/v1/q_box_posts/" + this.getContentId,
           {
-            answer: this.sentence + keepSentence,
+            answer: this.sentence,
             replyTweetId: id,
             state: state,
           },
@@ -256,7 +250,7 @@ export default {
 <style scoped lang="scss">
 .sentence-box {
   width: calc(100% - 40px);
-  height: 150px;
+  height: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -276,19 +270,23 @@ export default {
     border-width: 2px;
     border-radius: 10px;
   }
-  button {
-    width: 80px;
-    height: 30px;
-    margin-top: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    background: none;
-    transition: 0.5s;
-    cursor: pointer;
-    &:hover {
-      background-color: #77d;
-      border: 1px solid rgba(0, 0, 200, 1);
-      color: white;
+  .button-container {
+    display: flex;
+    button {
+      margin: 0 5px;
+      width: 80px;
+      height: 30px;
+      margin-top: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      background: none;
+      transition: 0.5s;
+      cursor: pointer;
+      &:hover {
+        background-color: #77d;
+        border: 1px solid rgba(0, 0, 200, 1);
+        color: white;
+      }
     }
   }
 }
@@ -302,7 +300,7 @@ export default {
     padding-top: 0;
     &-to {
       opacity: 1;
-      height: 150px;
+      height: 120px;
       padding-top: 20px;
     }
     &-active {
@@ -345,7 +343,7 @@ export default {
       &-to {
         opacity: 1;
         padding-top: 10px;
-        height: 150px;
+        height: 120px;
       }
       &-active {
         transition: 0.5s;
@@ -354,7 +352,7 @@ export default {
     &-leave {
       opacity: 1;
       padding-top: 10px;
-      height: 150px;
+      height: 120px;
       &-to {
         opacity: 0;
         height: 0;

@@ -119,7 +119,7 @@ ul {
       }
       div button,
       button {
-        width: 50px;
+        width: 100px;
         height: 30px;
         border: 1px solid rgba(0, 0, 0, 0.3);
         border-radius: 5px;
@@ -164,6 +164,8 @@ ul {
         div {
           width: 50px;
           button {
+            width: 50px;
+            height: 70px;
             margin: 5px 0;
           }
         }

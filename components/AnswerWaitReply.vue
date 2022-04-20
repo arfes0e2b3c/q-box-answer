@@ -5,16 +5,9 @@
     <li v-for="post in posts" :key="post.id">
       <h3>{{ post.question }}</h3>
       <p>{{ post.answer }}</p>
-      <div
-        v-for="reply in post.replies"
-        :key="reply.id"
-        :class="{ held: reply.held }"
-      >
+      <div v-for="reply in post.replies" :key="reply.id">
         <div class="manage-send-sentence-box">
-          <div>
-            <button @click="deletePost(reply.id)">削除</button>
-            <button @click="holdPost(reply.id, reply.held)">保留</button>
-          </div>
+          <button @click="deletePost(reply.id)">削除</button>
           <h4>{{ reply.replySentence }}</h4>
           <button @click="showSendSentence(reply.id)" class="toggle-button">
             開閉
@@ -114,9 +107,6 @@ export default {
     deletePost(id) {
       Common.deletePost(this, id, "q_box_replies", this.MICROCMS_KEY);
     },
-    holdPost(id, held) {
-      Common.holdPost(this, id, "q_box_replies", this.MICROCMS_KEY, held);
-    },
   },
   mounted() {
     this.MICROCMS_KEY = process.env.MICROCMS_KEY;
@@ -178,7 +168,7 @@ ul {
         align-items: center;
         div button,
         button {
-          width: 50px;
+          width: 100px;
           height: 30px;
           border: 1px solid rgba(0, 0, 0, 0.3);
           border-radius: 5px;
@@ -192,7 +182,6 @@ ul {
           }
         }
         .toggle-button {
-          width: 100px;
           &:hover {
             background-color: rgb(48, 48, 48);
             border: 1px solid rgba(255, 255, 255, 1);
@@ -202,22 +191,6 @@ ul {
           width: 70%;
           white-space: pre-wrap;
           text-align: center;
-        }
-      }
-    }
-    .held {
-      background-color: #333;
-      color: white;
-      div div button {
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 1);
-      }
-      .toggle-button {
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 1);
-        &:hover {
-          background-color: white;
-          color: rgb(48, 48, 48);
         }
       }
     }
@@ -247,18 +220,12 @@ p {
         margin: 5px 0;
         padding: 10px;
         .manage-send-sentence-box {
-          div {
+          button {
             width: 50px;
-            button {
-              margin: 5px 0;
-            }
+            height: 70px;
           }
           h4 {
             max-width: calc(100% - 120px);
-          }
-          .toggle-button {
-            width: 50px;
-            height: 70px;
           }
         }
       }

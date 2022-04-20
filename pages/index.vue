@@ -11,24 +11,34 @@
       >
         質問箱(管理者版)
       </h1>
-      <button @click="changePage">画面切り替え</button>
+      <button @click="changeShowMode">画面切り替え</button>
     </header>
     <AnswerWaitPost v-show="showPost" class="answer-wait-post" />
     <AnswerWaitReply v-show="showReply" class="answer-wait-reply" />
+    <AnswerKeepPost v-show="showKeep" class="answer-keep-post" />
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      showPost: true,
-      showReply: false,
+      showModeNumber: 0,
     };
   },
+  computed: {
+    showPost() {
+      return this.showModeNumber % 3 === 0;
+    },
+    showReply() {
+      return this.showModeNumber % 3 === 1;
+    },
+    showKeep() {
+      return this.showModeNumber % 3 === 2;
+    },
+  },
   methods: {
-    changePage() {
-      this.showPost = !this.showPost;
-      this.showReply = !this.showReply;
+    changeShowMode() {
+      this.showModeNumber++;
     },
     toQBox() {
       const url = "https://unique-donut-e9d728.netlify.app/";
@@ -100,7 +110,8 @@ export default {
     }
   }
   .answer-wait-reply,
-  .answer-wait-post {
+  .answer-wait-post,
+  .answer-keep-post {
     margin-top: 90px;
   }
 }

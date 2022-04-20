@@ -1,4 +1,7 @@
 {
+  "AnswerKeepPost": {
+    "description": "Auto imported from components/AnswerKeepPost.vue"
+  },
   "AnswerWaitPost": {
     "description": "Auto imported from components/AnswerWaitPost.vue"
   },

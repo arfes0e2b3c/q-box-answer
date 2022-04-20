@@ -159,7 +159,7 @@ h2 {
   font-size: 2.2em;
 }
 ul {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
   li {
     display: flex;

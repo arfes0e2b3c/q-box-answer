@@ -21,6 +21,7 @@
           :content-id="post.id"
           :ref="post.id"
           :show="false"
+          :keepButton="true"
           :MICROCMS_KEY="MICROCMS_KEY"
           :CONSUMER_KEY="CONSUMER_KEY"
           :CONSUMER_KEY_SECRET="CONSUMER_KEY_SECRET"

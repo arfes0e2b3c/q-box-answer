@@ -21,7 +21,7 @@
         <button
           @click="sendSentence('keep')"
           class="button"
-          v-show="getMode !== 'keep'"
+          v-show="keepButton"
         >
           保留
         </button>
@@ -40,6 +40,7 @@ export default {
     contentOriginId: "",
     replySentence: "",
     show: "",
+    keepButton: false,
     MICROCMS_KEY: "",
     CONSUMER_KEY: "",
     CONSUMER_KEY_SECRET: "",
@@ -60,14 +61,15 @@ export default {
         answer: "この質問への回答を入力する",
         reply: "この質問への返信を入力する",
         replyForReply: "この返信への回答を入力する",
-        keep: "保留中の質問に対する回答を入力する",
+        answerForKeep:
+          "保留中の質問に対する最終回答を入力する(現在の回答は書き換えられます。)",
       },
       buttonWord: {
         question: "質問する",
         answer: "回答する",
         reply: "返信する",
         replyForReply: "回答する",
-        keep: "回答する",
+        answerForKeep: "回答する",
       },
     };
   },
@@ -76,26 +78,28 @@ export default {
       this.getShow = !this.getShow;
     },
     async sendSentence(state) {
-      if (this.sentence && this.getMode === "answer") {
-        this.postTweet(
-          this.sentence,
-          this.getContentId,
-          "tweet",
-          "answer",
-          state
-        );
-      } else if (this.sentence && this.getMode === "replyForReply") {
-        this.postTweet(
-          "【フォロワーの方からの情報】\n\n" +
-            this.getReplySentence +
-            "\n\n" +
-            "【お手サーから】\n" +
+      if (this.sentence) {
+        if (this.getMode === "answer" || this.getMode === "answerForKeep") {
+          this.postTweet(
             this.sentence,
-          this.getReplyTweetId,
-          "reply",
-          "replyForReply"
-        );
-        this.$emit("setReply");
+            this.getContentId,
+            "tweet",
+            "answer",
+            state
+          );
+        } else if (this.getMode === "replyForReply") {
+          this.postTweet(
+            "【フォロワーの方からの情報】\n\n" +
+              this.getReplySentence +
+              "\n\n" +
+              "【お手サーから】\n" +
+              this.sentence,
+            this.getReplyTweetId,
+            "reply",
+            "replyForReply"
+          );
+          this.$emit("setReply");
+        }
       }
     },
     async postTweet(answer, id, mode, sendSentenceMode, state) {

@@ -21,6 +21,7 @@
           :contentOriginId="post.id"
           :replySentence="reply.replySentence"
           :show="false"
+          :keepButton="false"
           :MICROCMS_KEY="MICROCMS_KEY"
           :CONSUMER_KEY="CONSUMER_KEY"
           :CONSUMER_KEY_SECRET="CONSUMER_KEY_SECRET"

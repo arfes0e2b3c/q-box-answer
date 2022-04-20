@@ -19,9 +19,10 @@
           <p v-html="reply.replyAnswer">{{ reply.replyAnswer }}</p>
         </div>
         <SharedSendSentence
-          :mode="modeAnswer"
+          :mode="modeAnswerForKeep"
           :contentId="post.id"
           :show="true"
+          :keepButton="false"
           :MICROCMS_KEY="MICROCMS_KEY"
           :CONSUMER_KEY="CONSUMER_KEY"
           :CONSUMER_KEY_SECRET="CONSUMER_KEY_SECRET"
@@ -57,7 +58,7 @@ export default {
       ACCESS_TOKEN_KEY_SECRET: "",
       posts: [],
       modeQuestion: "question",
-      modeAnswer: "answer",
+      modeAnswerForKeep: "answerForKeep",
       postCount: 0,
     };
   },
